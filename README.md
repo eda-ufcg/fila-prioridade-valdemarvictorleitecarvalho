@@ -1,8 +1,8 @@
 # Identificação
 
-* Nome: 
-* Email (@ccc): 
-* Matrícula: 
+* Nome: Valdemar Victor Leite Carvalho
+* Email (@ccc): valdemar.victor.leite.carvalho@ccc.ufcg.edu.br
+* Matrícula: 123110796
 
 # Roteiro: Fila de Prioridade
 
