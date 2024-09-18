@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 public class RoteiroTest {
-    
+
     @Test
 	public void test() {
 		FilaPrioridade heap = new HeapFilaPrioridade(5);
@@ -12,10 +12,9 @@ public class RoteiroTest {
 		FilaPrioridade[] estrategias = new FilaPrioridade[3];
 		estrategias[0] = heap;
 		estrategias[1] = insereFinal;
-		estrategias[2] = insertion;
+        estrategias[2] = insertion;
 
-
-		// 1, 2, 3, 4, 5
+        // 1, 2, 3, 4, 5
 		for (FilaPrioridade fila : estrategias) {
 			fila.add("a", 1);
 			fila.add("b", 2);
@@ -42,7 +41,7 @@ public class RoteiroTest {
 
 		for (FilaPrioridade fila : estrategias) {
 			assertEquals(fila.removeNext(), "a");
-		}		
+		}
 
 		// 5, 4, 3, 2, 1
 		for (FilaPrioridade fila : estrategias) {

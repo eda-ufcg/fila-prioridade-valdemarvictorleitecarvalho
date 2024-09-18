@@ -3,11 +3,13 @@ public class InsereOrdenadoFilaPrioridade implements FilaPrioridade {
 	private Pair[] fila;
 	private int head;
 	private int last;
+    private int size;
 
 	public InsereOrdenadoFilaPrioridade(int capacidade) {
 		this.fila = new Pair[capacidade];
 		this.last = -1;
 		this.head = -1;
+        this.size = 0;
 	}
 
 	private boolean isEmpty() {
@@ -24,16 +26,22 @@ public class InsereOrdenadoFilaPrioridade implements FilaPrioridade {
 
         if (isEmpty()) this.head = 0;
 
-        if (isFull()) this.head = (this.head + 1) % this.fila.length;
+        if (isFull()) resize();
+
+        this.size++;
 
         this.last = (this.last + 1) % this.fila.length;
         this.fila[this.last] = newPair;
 
-        for (int i = this.last; i < this.head; i--) {
-            if (this.fila[i].getPrioridade() > this.fila[i - 1].getPrioridade()) {
-                swap(i, i - 1);
-            }
+        int i = this.last;
+        while (i > 0 && this.fila[i].getPrioridade() > this.fila[i - 1].getPrioridade()) {
+            swap(i, i - 1);
+            i--;
         }
+    }
+
+    public int size() {
+        return this.size;
     }
 
     private void swap(int i, int j) {
@@ -42,6 +50,21 @@ public class InsereOrdenadoFilaPrioridade implements FilaPrioridade {
         this.fila[j] = aux;
     }
 
+    private void resize(){
+		Pair[] newFila = new Pair[this.fila.length * 2];
+		int j = this.head;
+		int end = size();
+
+		for(int i = 0 ; i < end ; i++){
+			newFila[i] = this.fila[j];
+			j = (j + 1) % this.fila.length;
+		}
+
+		this.head = 0;
+		this.last = end - 1;
+
+		this.fila = newFila;
+	}
 
 	// remover e retornar o primeiro elemento do array, que é o de maior prioridade. lembrar manipular head e tail
 	// para ser uma fila circular. assim a remoção fica O(1)
@@ -49,6 +72,7 @@ public class InsereOrdenadoFilaPrioridade implements FilaPrioridade {
         if (isEmpty()) throw new RuntimeException("Fila vazia");
 
         String elem = this.fila[this.head].getElemento();
+        this.size--;
 
         if (this.head == this.last) {
             this.head = -1;
