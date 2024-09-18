@@ -1,5 +1,5 @@
 public class Pair {
-	
+
 	private String elemento;
 	private int prioridade;
 
@@ -11,7 +11,6 @@ public class Pair {
 	public String getElemento() {
 		return elemento;
 	}
-
 
 	public int getPrioridade() {
 		return this.prioridade;
